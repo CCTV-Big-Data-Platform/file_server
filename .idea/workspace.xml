@@ -14,7 +14,7 @@
         <entry file="file://$PROJECT_DIR$/file_server/file/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+              <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -46,8 +46,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/file_server/file_server/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-316">
-              <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+            <state relative-caret-position="381">
+              <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -65,9 +65,9 @@
         <option value="$PROJECT_DIR$/file_server/file_server/urls.py" />
         <option value="$PROJECT_DIR$/file_server/file/admin.py" />
         <option value="$PROJECT_DIR$/file_server/file/forms.py" />
-        <option value="$PROJECT_DIR$/file_server/file_server/settings.py" />
         <option value="$PROJECT_DIR$/file_server/file/views.py" />
         <option value="$PROJECT_DIR$/file_server/file/models.py" />
+        <option value="$PROJECT_DIR$/file_server/file_server/settings.py" />
       </list>
     </option>
   </component>
@@ -234,14 +234,14 @@
     <entry file="file://$PROJECT_DIR$/file_server/file/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/file_server/file_server/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-316">
-          <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+        <state relative-caret-position="381">
+          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
         </state>
       </provider>
     </entry>

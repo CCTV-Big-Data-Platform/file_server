@@ -25,7 +25,7 @@ SECRET_KEY = 'y-yt*2es6821o$-5*d01epjpv2jb^^h@uo58or!=%0ijepzaww'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['victoria.khunet.net', 'localhost', '127.0.0.1', '1.201.143.22']
 
 
 # Application definition
