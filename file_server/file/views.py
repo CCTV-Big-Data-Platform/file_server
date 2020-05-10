@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from rest_framework.parsers import FileUploadParser
 from rest_framework.views import APIView
 from .forms import UploadFileForm
+from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 
 
@@ -15,8 +16,8 @@ class FileUploadView(APIView):
               userName = request.POST['userName']
               form.save()
 
-              return HttpResponseRedirect('/success/url/')
+              return HttpResponse('upload_success')
         else:
           form = UploadFileForm()
         # return render(request, 'upload.html', {'form': form})
-        return HttpResponseRedirect('/failure/url/')
+        return HttpResponse('/upload_failure')
