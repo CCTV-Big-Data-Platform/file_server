@@ -10,6 +10,8 @@ class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
     def post(self, request, *args, **kwargs):
+        print("POST : " , request.POST)
+        print("FILES : " , request.FILES)
         if request.method == 'POST':
           form = UploadFileForm(request.POST, request.FILES)
           if form.is_valid():
