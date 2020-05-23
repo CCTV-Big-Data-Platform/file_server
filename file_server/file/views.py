@@ -1,24 +1,27 @@
-from django.http import HttpResponseRedirect
 from rest_framework.parsers import FileUploadParser
 from rest_framework.views import APIView
 from .forms import UploadFileForm
 from django.http import HttpResponse
-from django.core.files.storage import FileSystemStorage
-
+import base64
+import json
 
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
-
     def post(self, request, *args, **kwargs):
-        print("POST : " , request.POST)
-        print("FILES : " , len(request.FILES))
         if request.method == 'POST':
-          form = UploadFileForm(request.POST, request.FILES)
-          if form.is_valid():
-              userName = request.POST['userName']
-              form.save()
+            befEncoding = request.POST['befEncoding']
+            userId = request.POST['userId']
+            timeStamp = request.POST['timeStamp']
+            # bytesLike = bytes(befEncoding, encoding='utf8')
+            # print("BYTES : ", bytesLike)
+            # encoded_string = base64.b64encode(bytesLike)
+            # print("Hey : ", encoded_string)
 
-              return HttpResponse('upload_success')
+            json_data = json.dumps({'data': befEncoding, 'userId': userId , 'timestamp' : timeStamp})
+            with open("media/"+userId+"/"+userId+"_"+timeStamp+".json", "w") as file:
+                json.dump(json_data,file,indent="\t")
+
+            return HttpResponse('save_success')
         else:
           form = UploadFileForm()
         # return render(request, 'upload.html', {'form': form})
