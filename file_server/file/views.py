@@ -4,7 +4,7 @@ from .forms import UploadFileForm
 from django.http import HttpResponse
 import base64
 import json
-
+import os
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
     def post(self, request, *args, **kwargs):
@@ -19,6 +19,10 @@ class FileUploadView(APIView):
             # print("Hey : ", encoded_string)
 
             json_data = json.dumps({'data': befEncoding, 'userId': userId , 'timestamp' : timeStamp})
+
+            if not os.path.exists('./media/'+userId):
+                os.makedirs('./media/'+userId)
+
             with open("media/"+userId+"/"+userId+"_"+timeStamp+".json", "w") as file:
                 json.dump(json_data,file,indent="\t")
             print("---- process exit ----")
