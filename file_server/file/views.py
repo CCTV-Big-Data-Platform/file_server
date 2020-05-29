@@ -11,6 +11,7 @@ class FileUploadView(APIView):
         if request.method == 'POST':
             print("---- data in ----")
             befEncoding = request.POST['befEncoding']
+            print("DATA : ", befEncoding)
             userId = request.POST['userId']
             timeStamp = request.POST['timeStamp']
             # bytesLike = bytes(befEncoding, encoding='utf8')
