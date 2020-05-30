@@ -31,8 +31,9 @@ class FileUploadView(APIView):
 
             try:
                 record_metadata = future.get(timeout=10)
-            except KafkaError:
+            except KafkaError as err:
                 # Decide what to do if produce request failed…
+                print(err)
                 # log.exception()
                 pass
 
