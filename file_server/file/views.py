@@ -18,13 +18,13 @@ class FileUploadView(APIView):
             timeStamp = request.POST['timeStamp']
             encoded = befEncoding.encode()
 
-            json_data = json.dumps({'data': befEncoding, 'userId': userId , 'timestamp' : timeStamp})
+            dict_data = {'data': befEncoding, 'userId': userId, 'timestamp': timeStamp}
 
             if not os.path.exists('./media/'+userId):
                 os.makedirs('./media/'+userId)
 
             with open("media/"+userId+"/"+userId+"_"+timeStamp+".json", "w") as file:
-                json.dump(json_data,file,indent="\t")
+                json.dump(dict_data, file, indent="\t")
 
             producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'])
             future = producer.send('testTopic', encoded)
