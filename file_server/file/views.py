@@ -26,7 +26,7 @@ class FileUploadView(APIView):
             with open("media/"+userId+"/"+userId+"_"+timeStamp+".json", "w") as file:
                 json.dump(dict_data, file, indent="\t")
 
-            producer = KafkaProducer(bootstrap_servers='localhost:9092', max_request_size=3173440261)
+            producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'], max_request_size=52428800)
 
             future = producer.send('testTopic', encoded)
 
@@ -50,10 +50,3 @@ class FileUploadView(APIView):
         # return render(request, 'upload.html', {'form': form})
         return HttpResponse('/upload_failure')
 
-
-# bytesLike = bytes(befEncoding, encoding='utf8')
-# print("BYTES : ", bytesLike)
-
-# encoded_string = base64.b64encode(bytesLike)
-# print("Hey : ", encoded_string)
-# producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'])
