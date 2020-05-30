@@ -16,13 +16,7 @@ class FileUploadView(APIView):
             befEncoding = request.POST['befEncoding']
             userId = request.POST['userId']
             timeStamp = request.POST['timeStamp']
-            encode = befEncoding.encode()
-            print("BYTE : ", encode)
-            bytesLike = bytes(befEncoding, encoding='utf8')
-            print("BYTES : ", bytesLike)
-
-            # encoded_string = base64.b64encode(bytesLike)
-            # print("Hey : ", encoded_string)
+            encoded = befEncoding.encode()
 
             json_data = json.dumps({'data': befEncoding, 'userId': userId , 'timestamp' : timeStamp})
 
@@ -33,7 +27,7 @@ class FileUploadView(APIView):
                 json.dump(json_data,file,indent="\t")
 
             producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'])
-            future = producer.send('testTopic', befEncoding.encode())
+            future = producer.send('testTopic', encoded)
 
             try:
                 record_metadata = future.get(timeout=10)
@@ -43,9 +37,9 @@ class FileUploadView(APIView):
                 pass
 
             # Successful result returns assigned partition and offset
-            print(record_metadata.topic)
-            print(record_metadata.partition)
-            print(record_metadata.offset)
+            print("TOPIC : ", record_metadata.topic)
+            print("Partition :", record_metadata.partition)
+            print("Offset : ", record_metadata.offset)
             print("---- process exit ----")
 
             return HttpResponse('save_success')
@@ -55,3 +49,8 @@ class FileUploadView(APIView):
         return HttpResponse('/upload_failure')
 
 
+# bytesLike = bytes(befEncoding, encoding='utf8')
+# print("BYTES : ", bytesLike)
+
+# encoded_string = base64.b64encode(bytesLike)
+# print("Hey : ", encoded_string)
