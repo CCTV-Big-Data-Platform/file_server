@@ -26,9 +26,11 @@ class FileUploadView(APIView):
             with open("media/"+userId+"/"+userId+"_"+timeStamp+".json", "w") as file:
                 json.dump(dict_data, file, indent="\t")
 
-            producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'], max_request_size=52428800)
 
-            future = producer.send('test55', encoded)
+            producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'], max_request_size=52428800)
+            jsonObject = json.dumps(dict_data).encode('utf-8')
+
+            future = producer.send('test66', jsonObject)
 
             try:
                 record_metadata = future.get(timeout=10)
