@@ -28,7 +28,7 @@ class FileUploadView(APIView):
 
             producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'], max_request_size=52428800)
 
-            future = producer.send('CCTV-stream', encoded)
+            future = producer.send('test55', encoded)
 
             try:
                 record_metadata = future.get(timeout=10)
