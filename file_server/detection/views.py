@@ -1,0 +1,60 @@
+from rest_framework.views import APIView
+from django.http import HttpResponse
+import requests
+import json
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import messaging
+from firebase_admin import datetime
+
+cred = credentials.Certificate('./detection/whatsup-ad0b7-firebase-adminsdk-6yhd1-2e4fcd728a.json')
+default_app = firebase_admin.initialize_app(cred)
+topic = 'detection'
+
+
+class NotificationView(APIView):
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            befEncoding = request.POST['befEncoding']
+            timestamp = request.POST['timestamp']
+            detectionType = request.POST['detectionType']
+
+            bodyContent = "침입자 발생!!"
+            if detectionType == "fire":
+                bodyContent = "불났어요 불났어요 삐뽀삐뽀!!"
+
+            message = messaging.Message(
+                android=messaging.AndroidConfig(
+                    ttl=datetime.timedelta(seconds=3600),
+                    priority='normal',
+                    notification=messaging.AndroidNotification(
+                        title='삐뽀삐뽀',
+                        body = bodyContent,
+                        icon='',
+                        color='#f45342',
+                        sound='default'
+                    ),
+                ),
+                data={
+                    'byteArray': befEncoding,
+                    'timestamp': timestamp
+                },
+                webpush=messaging.WebpushConfig(
+                    notification=messaging.WebpushNotification(
+                        title='웹 알림',
+                        body='여긴 어떨까',
+                        icon='',
+                    ),
+                ),
+                # topic=topic
+                token="fDfpJ_GWZKU:APA91bFpa_NFD_eUEFPH1knCOsc69hdybTcUEpBZkRxmZIPE3bqfO1FtZ8tCCPMtVpqujjTrQfGo8W5f-Pf6WJ2WPXxmIoVBFNOw3qYWco6OkBjv0Mygr8xClyX_3jhaAvb_F5JN72Zf"
+            )
+
+            response = messaging.send(message)
+            # Response is a message ID string.
+            print('Successfully sent message:', response)
+
+            return HttpResponse('notification_success')
+
+        return HttpResponse('/notification_failure')
+

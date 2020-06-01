@@ -16,7 +16,6 @@ class FileUploadView(APIView):
             befEncoding = request.POST['befEncoding']
             userId = request.POST['userId']
             timeStamp = request.POST['timeStamp']
-            encoded = befEncoding.encode()
 
             dict_data = {'data': befEncoding, 'userId': userId, 'timestamp': timeStamp}
 
