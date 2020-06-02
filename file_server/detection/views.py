@@ -17,7 +17,7 @@ topic = 'detection'
 class NotificationView(APIView):
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
-            befEncoding = request.POST['befEncoding']
+            befEncoding = request.POST.get('befEncoding', False)
             timestamp = request.POST['timestamp']
             userId = request.POST['userId']
             detectionType = request.POST['detectionType']
