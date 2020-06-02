@@ -18,9 +18,9 @@ class NotificationView(APIView):
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
             befEncoding = request.POST.get('befEncoding', False)
-            timestamp = request.POST['timestamp']
-            userId = request.POST['userId']
-            detectionType = request.POST['detectionType']
+            timestamp = request.POST.get('timestamp', False)
+            userId = request.POST.get('timestamp', False)
+            detectionType = request.POST.get('detectionType',False)
 
             user = User.objects.get(userId=userId)
 
