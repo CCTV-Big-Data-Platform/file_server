@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'file.apps.FileConfig',
     'detection.apps.DetectionConfig',
+    'user.apps.UserConfig',
     'corsheaders',
 ]
 
