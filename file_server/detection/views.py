@@ -19,9 +19,9 @@ class NotificationView(APIView):
         if request.method == 'POST':
             befEncoding = request.POST.get('befEncoding', False)
             timestamp = request.POST.get('timestamp', False)
-            userId = request.POST.get('timestamp', False)
+            userId = request.POST.get('userId', False)
             detectionType = request.POST.get('detectionType',False)
-
+            print("USER : ",userId)
             user = User.objects.get(userId=userId)
 
             bodyContent = "침입자 발생!!"
