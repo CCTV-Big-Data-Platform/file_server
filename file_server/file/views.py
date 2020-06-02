@@ -26,7 +26,7 @@ class FileUploadView(APIView):
                 json.dump(dict_data, file, indent="\t")
 
 
-            producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'], max_request_size=52428800)
+            producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'], max_request_size=5242880000)
             jsonObject = json.dumps(dict_data).encode('utf-8')
 
             future = producer.send('test', jsonObject)
