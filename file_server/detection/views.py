@@ -21,12 +21,14 @@ class NotificationView(APIView):
             timestamp = request.POST.get('timestamp', False)
             userId = request.POST.get('userId', False)
             detectionType = request.POST.get('detectionType',False)
-            print("USER : ",userId)
+            print("USER : ", userId)
             user = User.objects.get(userId=userId)
 
-            bodyContent = "침입자 발생!!"
+            bodyContent = ""
             if detectionType == "fire":
                 bodyContent = "불났어요 불났어요 삐뽀삐뽀!!"
+            elif detectionType == "face":
+                bodyContent = "침입자 발생!! 위이이이잉!!"
 
             message = messaging.Message(
                 android=messaging.AndroidConfig(
