@@ -6,6 +6,8 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import messaging
 from firebase_admin import datetime
+from django.apps import apps
+User = apps.get_model('user', 'User')
 
 cred = credentials.Certificate('./detection/whatsup-ad0b7-firebase-adminsdk-6yhd1-2e4fcd728a.json')
 default_app = firebase_admin.initialize_app(cred)
@@ -17,7 +19,10 @@ class NotificationView(APIView):
         if request.method == 'POST':
             befEncoding = request.POST['befEncoding']
             timestamp = request.POST['timestamp']
+            userId = request.POST['userId']
             detectionType = request.POST['detectionType']
+
+            user = User.objects.get(userId=userId)
 
             bodyContent = "침입자 발생!!"
             if detectionType == "fire":
@@ -47,7 +52,7 @@ class NotificationView(APIView):
                     ),
                 ),
                 # topic=topic
-                token="fDfpJ_GWZKU:APA91bFpa_NFD_eUEFPH1knCOsc69hdybTcUEpBZkRxmZIPE3bqfO1FtZ8tCCPMtVpqujjTrQfGo8W5f-Pf6WJ2WPXxmIoVBFNOw3qYWco6OkBjv0Mygr8xClyX_3jhaAvb_F5JN72Zf"
+                token=user.userToken
             )
 
             response = messaging.send(message)
