@@ -28,7 +28,7 @@ class FileUploadView(APIView):
             producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'], max_request_size=209717600)
             jsonObject = json.dumps(dict_data).encode('utf-8')
 
-            future = producer.send('test3', jsonObject)
+            future = producer.send('test4', jsonObject)
 
             try:
                 record_metadata = future.get(timeout=10)
