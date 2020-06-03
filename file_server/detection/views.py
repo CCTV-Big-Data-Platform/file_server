@@ -17,18 +17,20 @@ topic = 'detection'
 class NotificationView(APIView):
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
-            befEncoding = request.POST.get('befEncoding', False)
             timestamp = request.POST.get('timestamp', False)
             userId = request.POST.get('userId', False)
             detectionType = request.POST.get('detectionType',False)
             print("USER : ", userId)
+            print("timestamp : ", timestamp)
+            print("detectionType : ", detectionType)
+
             user = User.objects.get(userId=userId)
 
             bodyContent = ""
-            if detectionType == "fire":
-                bodyContent = "불났어요 불났어요 삐뽀삐뽀!!"
-            elif detectionType == "face":
-                bodyContent = "침입자 발생!! 위이이이잉!!"
+            if detectionType == "fire_broken":
+                bodyContent = "불났어요 불났어요!!   " + timestamp
+            elif detectionType == "unknown_person":
+                bodyContent = "침입자 발생!!   " + timestamp
 
             message = messaging.Message(
                 android=messaging.AndroidConfig(
@@ -43,7 +45,6 @@ class NotificationView(APIView):
                     ),
                 ),
                 data={
-                    'byteArray': befEncoding,
                     'timestamp': timestamp
                 },
                 webpush=messaging.WebpushConfig(
