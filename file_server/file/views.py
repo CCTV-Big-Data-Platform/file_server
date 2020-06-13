@@ -8,10 +8,10 @@ import os
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
 
-type = True
-
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
+
+    tog = True
 
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
@@ -30,10 +30,10 @@ class FileUploadView(APIView):
 
             producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'], max_request_size=209717600)
             jsonObject = json.dumps(dict_data).encode('utf-8')
-            global type
-            type = self.toggle(self.type)
-            print(type)
-            future = producer.send('test4', jsonObject, {str(type): 'value'})
+            global tog
+            FileUploadView.tog = self.toggle( FileUploadView.tog)
+            print(FileUploadView.tog)
+            future = producer.send('test89', key = bytes(FileUploadView.tog) , value = jsonObject)
 
             try:
                 record_metadata = future.get(timeout=10)
@@ -55,6 +55,5 @@ class FileUploadView(APIView):
         # return render(request, 'upload.html', {'form': form})
         return HttpResponse('/upload_failure')
 
-    def toggle(self):
-        global type
-        return not type
+    def toggle(self, tog):
+        return not tog
