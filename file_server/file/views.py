@@ -29,7 +29,7 @@ class FileUploadView(APIView):
 
             producer = KafkaProducer(bootstrap_servers=['1.201.142.81:9092'], max_request_size=209717600)
             jsonObject = json.dumps(dict_data).encode('utf-8')
-            self.toggle(self.type)
+            self.type = self.toggle(self.type)
             print(self.type)
             future = producer.send('test4', jsonObject, {str(type): 'value'})
 
@@ -54,4 +54,4 @@ class FileUploadView(APIView):
         return HttpResponse('/upload_failure')
 
     def toggle(self, type):
-        self.type = not type
+        return not type
