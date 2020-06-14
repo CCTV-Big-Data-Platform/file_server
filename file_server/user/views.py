@@ -6,6 +6,9 @@ from .models import *
 from annoying.functions import get_object_or_None
 
 # Create your views here.
+"""
+User View는 사용자별 id와 그 사용자의 알림용 device의 고유 토큰을 세팅할 수 있는 view입니다.
+"""
 class UserView(APIView):
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':

@@ -8,6 +8,10 @@ import os
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
 
+"""
+File Upload View는 전송받은 프레임 데이터를 카프카에 프로듀스하는 클래스입니다. 
+post api를 안드로이드에서 호출하면 해당 데이터를 jsong Object를 str으로 dumps하여 프로듀스 진행합니다.
+"""
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
@@ -32,9 +36,13 @@ class FileUploadView(APIView):
             jsonObject = json.dumps(dict_data).encode('utf-8')
             global tog
             FileUploadView.tog = self.toggle( FileUploadView.tog)
-            print(FileUploadView.tog)
-            future = producer.send('test89', key = bytes(FileUploadView.tog) , value = jsonObject)
+            # print(type(FileUploadView.tog))
+            # if FileUploadView.tog == True:
+            #     future = producer.send('test4', jsonObject)
+            # elif FileUploadView.tog == False:
+            #     future = producer.send('test98', jsonObject)
 
+            future = producer.send('test4', jsonObject)
             try:
                 record_metadata = future.get(timeout=10)
             except KafkaError as err:
